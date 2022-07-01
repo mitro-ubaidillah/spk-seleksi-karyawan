@@ -1,0 +1,36 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    box-sizing: border-box;
+}
+
+.link-admin{
+    color: #ebeded;
+    font-weight: 500;
+}
+
+.login-link{
+    text-decoration: none;
+    background-color: #ebeded;
+    color: black;
+    font-weight: 700;
+    padding: 5px 20px;
+}
+.login-link:hover{
+    border: #ebeded 1px solid;
+    color: #ebeded;
+    background-color: transparent;
+}
+
+.form-login{
+    padding: 50px;
+    width: min(100% - 3rem, 580px);
+    margin-inline: auto;
+    background-color: #ebeded;
+}
+
+.color-w{
+    color: whitesmoke;
+}
