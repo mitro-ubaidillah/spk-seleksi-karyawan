@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBobotsTable extends Migration
+class CreateHasilSeleksisTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateBobotsTable extends Migration
      */
     public function up()
     {
-        Schema::create('bobots', function (Blueprint $table) {
+        Schema::create('hasil_seleksis', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('kriteria_id');
-            $table->integer('nilai_ideal');
+            $table->string('name');
+            $table->string('nilai');
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ class CreateBobotsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bobots');
+        Schema::dropIfExists('hasil_seleksis');
     }
 }

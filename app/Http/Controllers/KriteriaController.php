@@ -11,14 +11,16 @@ class KriteriaController extends Controller
     public function index()
     {
         $no = 1;
+        $title = "kriteria";
         $kriteria = Kriteria::oldest()->simplePaginate(5);
-        return view('admin.kriteria.index', compact('kriteria','no'));
+        return view('admin.kriteria.index', compact('kriteria','no','title'));
     }
 
     public function create()
     {
+        $title = "kriteria";
         $parents = KriteriaParent::all();
-        return view('admin.kriteria.create', compact('parents'));
+        return view('admin.kriteria.create', compact('parents','title'));
     }
 
     public function store(Request $request)
@@ -33,12 +35,13 @@ class KriteriaController extends Controller
         return redirect()->route('kriteria.index')->with('success','Data Kriteria Berhasil Ditambahkan!');
     }
 
-    public function edit(Kriteria $kriteria)
+    public function edit($id)
     {   
-        dd($kriteria);
-        // $kriteria = Kriteria::findOrFail($id);
+        // dd($kriteria);
+        $title = "kriteria";
+        $kriteria = Kriteria::findOrFail($id);
         $parents = KriteriaParent::all();
-        return view('admin.kriteria.edit', compact('kriteria','parents'));
+        return view('admin.kriteria.edit', compact('kriteria','parents', 'title'));
     }
 
     public function update(Request $request, $id)

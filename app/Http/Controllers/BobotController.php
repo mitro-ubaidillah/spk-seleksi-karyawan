@@ -2,18 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Bobot;
+use App\Models\Kriteria;
+use App\Models\KriteriaParent;
 use Illuminate\Http\Request;
 
 class BobotController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        $no = 1;
+        $title = "nilai standar";
+        $bobot = Bobot::oldest()->simplePaginate(5);
+        return view('admin.bobot.index', compact('bobot','no','title'));
     }
 
     /**
@@ -23,7 +24,10 @@ class BobotController extends Controller
      */
     public function create()
     {
-        //
+        $title = "nilai standar";
+        $kriteria = Kriteria::all();
+        $parent = KriteriaParent::all();
+        return view('admin.bobot.create', compact('kriteria','title','parent'));
     }
 
     /**
@@ -33,52 +37,66 @@ class BobotController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
+    {   
+        // dd($request->all());
+        $i = 0;
+        $kriteria = Kriteria::all();
+        foreach ($kriteria as $data) {
+            $id = str_replace(" ","_",$data->name).'_id';
+            $nilai = str_replace(" ","_",$data->name).'_nilai';
+            $data = [
+                'kriteria_id'   => $request->$id,
+                'nilai_ideal'   =>  $request->$nilai
+            ];
+            $validate = $request->validate([
+                'kriteria_id' => 'unique:bobots,id_kriteria'
+            ]);
+            if($validate){
+                Bobot::create($data);
+            }
+            // $data_id[$i++] = $request->$id;
+        }
+        // dd($data_id);
+        if($validate){
+            return redirect()->route('bobot.index')->with('success', 'Data berhasil update!');
+        }else{
+            return redirect()->route('bobot.index')->with('error', 'Data sudah ada!');
+        }
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        //
+        $bobot = Bobot::findOrFail($id);
+        $kriteria = Kriteria::all();
+        $title = "nilai standar";
+        return view('admin.bobot.edit', compact('bobot', 'kriteria', 'title'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
-        //
+        $bobot = Bobot::findOrFail($id);
+        $rules = ['nilai_ideal' => 'required'];
+
+        if($request->kriteria_id != $bobot->kriteria_id){
+            $rules['kriteria_id'] = 'required|unique:bobots,kriteria_id';
+        }
+
+        $validateData = $request->validate($rules);
+        $update = Bobot::where('id', $bobot->id)->update($validateData);
+
+        if($update)
+        {
+            return redirect()->route('bobot.index')->with('success', 'Data berhasil diubah!');
+        }else
+        {
+            return redirect()->route('bobot.index')->with('error', 'Data gagal diubah!');
+        }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        //
+        $bobot = Bobot::findOrFail($id);
+        $bobot->delete();
+        return redirect()->route('bobot.index')->with('success', 'Data berhasil dihapus!');
+
     }
 }

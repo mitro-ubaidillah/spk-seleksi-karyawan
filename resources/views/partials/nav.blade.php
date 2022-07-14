@@ -1,7 +1,7 @@
 @auth
 <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
   <div class="container">
-    <a class="navbar-brand fs-6" href="#">SPK Seleksi Calon Karyawan</a>
+    <a class="navbar-brand fs-6" href="/">SPK Seleksi Calon Karyawan</a>
     <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -24,23 +24,23 @@
 <header class="p-0 shadow">
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
-      <a class="navbar-brand fw-bold" href="#">SPK Seleksi Calon Karyawan</a>
+      <a class="navbar-brand fw-bold" href="/">SPK Seleksi Calon Karyawan</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse ms-5" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link fw-semibold" href="#">Beranda</a>
+            <a class="nav-link fw-semibold" href="/">Beranda</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link fw-semibold" href="#">Pemilihan Calon Pegawai</a>
+            <a class="nav-link fw-semibold" href="/seleksi-karyawan">Pemilihan Calon Pegawai</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link fw-semibold" href="#">Tentang</a>
+            <a class="nav-link fw-semibold" href="/#tentang">Tentang</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link fw-semibold" href="#">Kontak</a>
+            <a class="nav-link fw-semibold" href="/#kontak">Kontak</a>
           </li>
         </ul>
         <div class="navbar-nav ms-auto">
